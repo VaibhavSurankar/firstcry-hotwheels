@@ -491,6 +491,13 @@ def initialize_pincode(page):
 
     if not input_element:
         print("Pincode input not immediately visible.")
+        print("Checking if pincode is already applied from a previous page...")
+
+        already_set = verify_pincode(page, PINCODE)
+        if already_set is True:
+            print(f"Pincode {PINCODE} already active (carried over from session).")
+            return True
+
         print("Trying to open delivery/location control...")
 
         open_delivery_control(page)
@@ -536,8 +543,6 @@ def initialize_pincode(page):
     except Exception as e:
         print("Pincode initialization exception:", e)
         return False
-
-
 # ============================================================
 # STOCK DETECTION
 # ============================================================
